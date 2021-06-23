@@ -7,7 +7,7 @@ public class Config
 {
     private final Map<String, Item> properties;
 
-    public Config(Map<String, Item> properties)
+    Config(Map<String, Item> properties)
     {
         this.properties = properties;
     }
