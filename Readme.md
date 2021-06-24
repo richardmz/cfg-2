@@ -120,10 +120,137 @@ An interface provides methods below:
 
 #### Methods
 
-* _ItemType getType()_
-* _String getString()_
-* _Map<String, Item> getMap()_
-* _List<Item> getList()_
+* _ItemType getType()_ - Returns the type (_ItemType_) of this item.
+* _String getString()_ - Returns the string value of this item if it's type of _STRING_, or throws a runtime exception.
+* _Map<String, Item> getMap()_ - Returns the map value of this item if it's type of _STRING_, or throws a runtime exception.
+* _List<Item> getList()_ - Returns the list value of this item if it's type of _STRING_, or throws a runtime exception.
+
+### _fly.dream.cfg.ItemType_
+
+Includes following types:
+
+* STRING
+* MAP
+* LIST
+* PROPERTY - Only appears in parsing process. Eliminated in the parse result.
+
+## Digest example
+
+### _server-config.cfg_
+
+    tmp.dir "custom-temp-dir"
+
+    hosts
+    {
+      localhost
+      {
+        app.base "web-apps"
+      }
+    }
+
+    connectors
+    [
+      {
+        port "8080"
+        upgrade.insecure.request "1"
+        upgrade.port "8443"
+      }
+
+      {
+        port "8443"
+        ssl "on"
+        ssl.context.protocol "TLS"
+        keystore.file ".keystore"
+        passphrase "Change it"
+        keystore.type "JKS"
+        keystore.algorithm "PKIX"
+        truststore.type "JKS"
+        truststore.algorithm "PKIX"
+        compression "on"
+      }
+    ]
+
+### _Configuration.java_
+
+    class Configuration
+    {
+        private final String tmpDir;
+        private final Map<String, Host> hosts;
+        private final List<Connector> connectors;
+
+        // You can change Exception to a more suitable one
+        Configuration(Config config) throws Exception
+        {
+            // Digest in its constructor
+
+            // tmp.dir
+            String key = "tmp.dir";
+            if (config.contains(key))
+            {
+                Item item = config.get(key);
+                if (item.getType() != STRING)
+                {
+                    throw new Exception("Type of '" + key + "' must be STRING");
+                }
+                else
+                {
+                    this.tmpDir = item.getString();
+                }
+            }
+            else
+            {
+                this.tmpDir = System.getProperty("user.dir") + File.separator + "temp";
+            }
+
+            // hosts
+            key = "hosts";
+            if (!config.contains(key))
+            {
+                throw new Exception("'" + key + "' is required");
+            }
+            else
+            {
+                Item item = config.get(key);
+                if (item.getType() != MAP)
+                {
+                    throw new Exception("Type of '" + key + "' must be MAP");
+                }
+                else
+                {
+                    hosts = new HashMap<String, Host>(1);
+                    for (Map.Entry<String, Item> entry : item.getMap().entrySet())
+                    {
+                        hosts.put(entry.getKey(), new Host(entry.getValue()));
+                    }
+                }
+            }
+
+            // connectors
+            key = "connectors";
+            if (!config.contains(key))
+            {
+                throw new Exception("'" + key + "' is required");
+            }
+            else
+            {
+                Item item = config.get(key);
+                if (item.getType() != LIST)
+                {
+                    throw new Exception("Type of '" + key + "' must be LIST");
+                }
+                else
+                {
+                    connectors = new ArrayList<Connector>(2);
+                    for (Item i : item.getList())
+                    {
+                        connectors.add(new Connector(i));
+                    }
+                }
+            }
+        }
+    }
+
+### _Host.java_ and _Connector.java_ are omitted
 
 ## License
 
