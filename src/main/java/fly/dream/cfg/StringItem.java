@@ -1,12 +1,11 @@
 package fly.dream.cfg;
 
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
 import static fly.dream.cfg.ItemType.STRING;
 
-public class StringItem implements Item
+public class StringItem implements Item, Printable
 {
     private final String value;
 
@@ -25,12 +24,6 @@ public class StringItem implements Item
     public String getString()
     {
         return value;
-    }
-
-    @Override
-    public Item getValue()
-    {
-        throw new RuntimeException("Should not get item value from a " + STRING);
     }
 
     @Override

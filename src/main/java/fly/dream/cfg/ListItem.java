@@ -6,7 +6,7 @@ import java.util.StringJoiner;
 
 import static fly.dream.cfg.ItemType.LIST;
 
-public class ListItem implements Item
+public class ListItem implements Item, Printable
 {
     private final List<Item> elements;
 
@@ -24,12 +24,6 @@ public class ListItem implements Item
     public List<Item> getList()
     {
         return elements;
-    }
-
-    @Override
-    public Item getValue()
-    {
-        throw new RuntimeException("Should not get item value from a " + LIST);
     }
 
     @Override
@@ -85,7 +79,7 @@ public class ListItem implements Item
         }
         for (Item element : elements)
         {
-            stringJoiner.add(Util.getIndent(lvl) + element.toString(lvl + 1));
+            stringJoiner.add(Util.getIndent(lvl) + ((Printable) element).toString(lvl + 1));
         }
         return stringJoiner.toString();
     }
@@ -108,7 +102,7 @@ public class ListItem implements Item
         }
         for (Item element : elements)
         {
-            stringJoiner.add(Util.getIndent(1) + element.toString(1));
+            stringJoiner.add(Util.getIndent(1) + ((Printable) element).toString(1));
         }
         return stringJoiner.toString();
     }

@@ -51,7 +51,7 @@ class ConfigBuilder
             case MAP:
                 SemiItem semiObject = semiItemStack.peek();
                 assert semiObject != null : "Stack should not be empty";
-                semiObject.put(semiProperty.getKey(), property.getValue());
+                semiObject.put(semiProperty.getKey(), ((Property) property).getValue());
                 break;
             case PROPERTY:
             case LIST:
@@ -71,7 +71,7 @@ class ConfigBuilder
                 Item property = semiProperty.finishProperty(object);
                 SemiItem parentItem = semiItemStack.peek();
                 assert parentItem != null : "Stack should not be empty";
-                parentItem.put(semiProperty.getKey(), property.getValue());
+                parentItem.put(semiProperty.getKey(), ((Property) property).getValue());
                 break;
             case LIST:
                 SemiItem semiList = semiItemStack.peek();
@@ -95,7 +95,7 @@ class ConfigBuilder
                 Item property = semiProperty.finishProperty(list);
                 SemiItem parentItem = semiItemStack.peek();
                 assert parentItem != null : "Stack should not be empty";
-                parentItem.put(semiProperty.getKey(), property.getValue());
+                parentItem.put(semiProperty.getKey(), ((Property) property).getValue());
                 break;
             case LIST:
                 SemiItem parentList = semiItemStack.peek();

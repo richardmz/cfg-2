@@ -5,7 +5,7 @@ import java.util.Map;
 
 import static fly.dream.cfg.ItemType.PROPERTY;
 
-public class PropertyItem implements Item
+public class PropertyItem implements Item, Property, Printable
 {
     private final Item value;
 
@@ -75,7 +75,7 @@ public class PropertyItem implements Item
     @Override
     public String toString(int lvl)
     {
-        return value.toString(lvl);
+        return ((Printable) value).toString(lvl);
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.StringJoiner;
 
 import static fly.dream.cfg.ItemType.MAP;
 
-public class MapItem implements Item
+public class MapItem implements Item, Printable
 {
     private final Map<String, Item> properties;
 
@@ -31,12 +31,6 @@ public class MapItem implements Item
     public String getString()
     {
         throw new RuntimeException("Should not get string value from a " + MAP);
-    }
-
-    @Override
-    public Item getValue()
-    {
-        throw new RuntimeException("Should not get item value from a " + MAP);
     }
 
     @Override
@@ -74,7 +68,7 @@ public class MapItem implements Item
         StringJoiner stringJoiner = new StringJoiner("\n", "\n" + Util.getIndent(lvl - 1) + "{\n", "\n" + Util.getIndent(lvl - 1) + "}");
         for (Map.Entry<String, Item> entry : properties.entrySet())
         {
-            stringJoiner.add(Util.getIndent(lvl) + entry.getKey() + " " + entry.getValue().toString(lvl + 1));
+            stringJoiner.add(Util.getIndent(lvl) + entry.getKey() + " " + ((Printable) entry.getValue()).toString(lvl + 1));
         }
         return stringJoiner.toString();
     }
@@ -85,7 +79,7 @@ public class MapItem implements Item
         StringJoiner stringJoiner = new StringJoiner("\n", "{\n", "\n}");
         for (Map.Entry<String, Item> entry : properties.entrySet())
         {
-            stringJoiner.add(Util.getIndent(1) + entry.getKey() + " " + entry.getValue().toString(2));
+            stringJoiner.add(Util.getIndent(1) + entry.getKey() + " " + ((Printable) entry.getValue()).toString(2));
         }
         return stringJoiner.toString();
     }

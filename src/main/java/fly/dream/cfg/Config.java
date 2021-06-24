@@ -32,7 +32,7 @@ public class Config
 
         for (Map.Entry<String, Item> entry : properties.entrySet())
         {
-            stringJoiner.add(entry.getKey() + " " + entry.getValue().toString(1));
+            stringJoiner.add(entry.getKey() + " " + ((Printable) entry.getValue()).toString(1));
         }
 
         return stringJoiner.toString();
