@@ -7,7 +7,7 @@ _fly.dream.cfg.Config_ object. Digesting jobs are left to the programmers.
 
 ### Stereotype
 
-```editorconfig
+```
 # Comment
 
 string1 "string value"
@@ -133,7 +133,7 @@ An interface provides methods below:
 
 #### Methods
 
-* _ItemType getType()_ - Returns the type (_ItemType_) of this item.
+* _ItemType getType()_ - Returns the type of this item.
 * _String getString()_ - Returns the string value of this item if it's type of _STRING_, or throws a runtime exception.
 * _Map<String, Item> getMap()_ - Returns the map value of this item if it's type of _STRING_, or throws a runtime exception.
 * _List<Item> getList()_ - Returns the list value of this item if it's type of _STRING_, or throws a runtime exception.
@@ -142,16 +142,16 @@ An interface provides methods below:
 
 Includes following types:
 
-* STRING
-* MAP
-* LIST
-* PROPERTY - Only appears in parsing process. Eliminated in the parse result.
+* _STRING_
+* _MAP_
+* _LIST_
+* _PROPERTY_ - Only appears in the parsing process. Eliminated in the parse result.
 
 ## Digest example
 
 ### _server-config.cfg_
 
-```editorconfig
+```
 tmp.dir "custom-temp-dir"
 
 hosts
@@ -201,7 +201,6 @@ class Configuration
     {
         // Digest in its constructor
 
-        // tmp.dir
         String key = "tmp.dir";
         if (config.contains(key))
         {
@@ -220,7 +219,6 @@ class Configuration
             this.tmpDir = System.getProperty("user.dir") + File.separator + "temp";
         }
 
-        // hosts
         key = "hosts";
         if (!config.contains(key))
         {
@@ -243,7 +241,6 @@ class Configuration
             }
         }
 
-        // connectors
         key = "connectors";
         if (!config.contains(key))
         {
