@@ -107,7 +107,7 @@ catch (IOException | ConfigException e)
 
 ### _fly.dream.cfg.Loader_
 
-This class provides instances to load configuration from a specified file into a _fly.dream.cfg.Config_ object.
+Its instances can be used to load configuration data from the specified file into a _fly.dream.cfg.Config_ object.
 
 #### Constructor
 
@@ -119,11 +119,11 @@ This class provides instances to load configuration from a specified file into a
 
 ### _fly.dream.cfg.Config_
 
-The root element of the configuration, and it's an anonymous map.
+Represents the root element of the configuration, and it's an anonymous map.
 
 #### Methods
 
-* _boolean contains(String key)_ - Returns true if it contains an entry with the specified key.
+* _boolean contains(String key)_ - Returns _true_ if it contains an entry with the specified key.
 * _Item get(String key)_ - Returns a _fly.dream.cfg.Item_ object to which the specified key is mapped, or _null_ if it
 contains no mapping for the key.
 
@@ -134,9 +134,9 @@ An interface provides methods below:
 #### Methods
 
 * _ItemType getType()_ - Returns the type of this item.
-* _String getString()_ - Returns the string value of this item if it's type of _STRING_, or throws a runtime exception.
-* _Map<String, Item> getMap()_ - Returns the map value of this item if it's type of _STRING_, or throws a runtime exception.
-* _List<Item> getList()_ - Returns the list value of this item if it's type of _STRING_, or throws a runtime exception.
+* _String getString()_ - Returns the string value of this item if its type is _STRING_, or throws a runtime exception.
+* _Map<String, Item> getMap()_ - Returns the map value of this item if its type is _MAP_, or throws a runtime exception.
+* _List<Item> getList()_ - Returns the list value of this item if its type is _LIST_, or throws a runtime exception.
 
 ### _fly.dream.cfg.ItemType_
 
@@ -196,11 +196,10 @@ class Configuration
     private final Map<String, Host> hosts;
     private final List<Connector> connectors;
 
-    // You can change Exception to a more suitable one
+    // Digesting can go in constructor
+    // Exception can be substituted to more proper subclasses
     Configuration(Config config) throws Exception
     {
-        // Digest in its constructor
-
         String key = "tmp.dir";
         if (config.contains(key))
         {
