@@ -125,11 +125,6 @@ An interface provides methods below:
 * _Map<String, Item> getMap()_
 * _List<Item> getList()_
 
-#### Methods not for API
-
-* _Item getValue()_
-* _String toString(int lvl)_
-
 ## License
 
 Apache 2.0 License. See LICENSE file.
