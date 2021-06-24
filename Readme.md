@@ -7,56 +7,58 @@ _fly.dream.cfg.Config_ object. Digesting jobs are left to the programmers.
 
 ### Stereotype
 
-    # Comment
-    
-    string1 "string value"
+```editorconfig
+# Comment
 
-    map1
-    {
-      string1 "string value"
-    
-      map1
-      {
-        ...
-      }
-    
-      list1
-      [
-        ...
-      ]
-      ...
-    }
-    
-    # A list can either be a map list, a string list or a list list.
-    # Elements of a list must be anonymous, that they're not key specified.
-    mapList1
-    [
-      {
-        ...
-      }
-      {
-        ...
-      }
-      ...
-    ]
-    
-    stringList1
-    [
-      "string1"
-      "string2"
-      ...
-    ]
-    
-    listList1
-    [
-      [
-        ...
-      ]
-      [
-        ...
-      ]
-      ...
-    ]
+string1 "string value"
+
+map1
+{
+  string1 "string value"
+
+  map1
+  {
+    ...
+  }
+
+  list1
+  [
+    ...
+  ]
+  ...
+}
+
+# A list can either be a map list, a string list or a list list.
+# Elements of a list must be anonymous, that they're not key specified.
+mapList1
+[
+  {
+    ...
+  }
+  {
+    ...
+  }
+  ...
+]
+
+stringList1
+[
+  "string1"
+  "string2"
+  ...
+]
+
+listList1
+[
+  [
+    ...
+  ]
+  [
+    ...
+  ]
+  ...
+]
+```
 
 ### Rules
 
@@ -73,22 +75,33 @@ _fly.dream.cfg.Config_ object. Digesting jobs are left to the programmers.
 
 ## How to use
 
-1. Install it as a 3rd part jar to your maven repository.
+1. [Install it as 3rd party JARs](https://maven.apache.org/guides/mini/guide-3rd-party-jars-local.html) to your maven repository.
+
 2. Add it to your project via pom.xml.
 
-### Java code
+```xml
+<dependency>
+    <groupId>fly.dream</groupId>
+    <artifactId>cfg</artifactId>
+    <version>2</version>
+</dependency>
+```
 
-    Path file = ...
-    try
-    {
-        Loader loader = new Loader(file);
-        Config config = loader.load();
-        ...
-    }
-    catch (IOException | ConfigException e)
-    {
-        ...
-    }
+3. Java code
+
+```java
+Path file = ...
+try
+{
+    Loader loader = new Loader(file);
+    Config config = loader.load();
+    ...
+}
+catch (IOException | ConfigException e)
+{
+    ...
+}
+```
 
 ## API
 
@@ -138,121 +151,125 @@ Includes following types:
 
 ### _server-config.cfg_
 
-    tmp.dir "custom-temp-dir"
+```editorconfig
+tmp.dir "custom-temp-dir"
 
-    hosts
-    {
-      localhost
-      {
-        app.base "web-apps"
-      }
-    }
+hosts
+{
+  localhost
+  {
+    app.base "web-apps"
+  }
+}
 
-    connectors
-    [
-      {
-        port "8080"
-        upgrade.insecure.request "1"
-        upgrade.port "8443"
-      }
+connectors
+[
+  {
+    port "8080"
+    upgrade.insecure.request "1"
+    upgrade.port "8443"
+  }
 
-      {
-        port "8443"
-        ssl "on"
-        ssl.context.protocol "TLS"
-        keystore.file ".keystore"
-        passphrase "Change it"
-        keystore.type "JKS"
-        keystore.algorithm "PKIX"
-        truststore.type "JKS"
-        truststore.algorithm "PKIX"
-        compression "on"
-      }
-    ]
+  {
+    port "8443"
+    ssl "on"
+    ssl.context.protocol "TLS"
+    keystore.file ".keystore"
+    passphrase "Change it"
+    keystore.type "JKS"
+    keystore.algorithm "PKIX"
+    truststore.type "JKS"
+    truststore.algorithm "PKIX"
+    compression "on"
+  }
+]
+```
 
 ### _Configuration.java_
 
-    import ...
+```java
+import ...
 
-    class Configuration
+class Configuration
+{
+    private final String tmpDir;
+    private final Map<String, Host> hosts;
+    private final List<Connector> connectors;
+
+    // You can change Exception to a more suitable one
+    Configuration(Config config) throws Exception
     {
-        private final String tmpDir;
-        private final Map<String, Host> hosts;
-        private final List<Connector> connectors;
+        // Digest in its constructor
 
-        // You can change Exception to a more suitable one
-        Configuration(Config config) throws Exception
+        // tmp.dir
+        String key = "tmp.dir";
+        if (config.contains(key))
         {
-            // Digest in its constructor
-
-            // tmp.dir
-            String key = "tmp.dir";
-            if (config.contains(key))
+            Item item = config.get(key);
+            if (item.getType() != STRING)
             {
-                Item item = config.get(key);
-                if (item.getType() != STRING)
-                {
-                    throw new Exception("Type of '" + key + "' must be STRING");
-                }
-                else
-                {
-                    this.tmpDir = item.getString();
-                }
+                throw new Exception("Type of '" + key + "' must be STRING");
             }
             else
             {
-                this.tmpDir = System.getProperty("user.dir") + File.separator + "temp";
+                this.tmpDir = item.getString();
             }
+        }
+        else
+        {
+            this.tmpDir = System.getProperty("user.dir") + File.separator + "temp";
+        }
 
-            // hosts
-            key = "hosts";
-            if (!config.contains(key))
+        // hosts
+        key = "hosts";
+        if (!config.contains(key))
+        {
+            throw new Exception("'" + key + "' is required");
+        }
+        else
+        {
+            Item item = config.get(key);
+            if (item.getType() != MAP)
             {
-                throw new Exception("'" + key + "' is required");
+                throw new Exception("Type of '" + key + "' must be MAP");
             }
             else
             {
-                Item item = config.get(key);
-                if (item.getType() != MAP)
+                hosts = new HashMap<String, Host>(1);
+                for (Map.Entry<String, Item> entry : item.getMap().entrySet())
                 {
-                    throw new Exception("Type of '" + key + "' must be MAP");
-                }
-                else
-                {
-                    hosts = new HashMap<String, Host>(1);
-                    for (Map.Entry<String, Item> entry : item.getMap().entrySet())
-                    {
-                        hosts.put(entry.getKey(), new Host(entry.getValue()));
-                    }
-                }
-            }
-
-            // connectors
-            key = "connectors";
-            if (!config.contains(key))
-            {
-                throw new Exception("'" + key + "' is required");
-            }
-            else
-            {
-                Item item = config.get(key);
-                if (item.getType() != LIST)
-                {
-                    throw new Exception("Type of '" + key + "' must be LIST");
-                }
-                else
-                {
-                    connectors = new ArrayList<Connector>(2);
-                    for (Item i : item.getList())
-                    {
-                        connectors.add(new Connector(i));
-                    }
+                    hosts.put(entry.getKey(), new Host(entry.getValue()));
                 }
             }
         }
 
-        // Getters omitted
+        // connectors
+        key = "connectors";
+        if (!config.contains(key))
+        {
+            throw new Exception("'" + key + "' is required");
+        }
+        else
+        {
+            Item item = config.get(key);
+            if (item.getType() != LIST)
+            {
+                throw new Exception("Type of '" + key + "' must be LIST");
+            }
+            else
+            {
+                connectors = new ArrayList<Connector>(2);
+                for (Item i : item.getList())
+                {
+                    connectors.add(new Connector(i));
+                }
+            }
+        }
     }
+
+    // Getters are omitted
+}
+```
 
 ### _Host.java_ and _Connector.java_ are omitted
 
