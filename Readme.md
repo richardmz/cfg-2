@@ -172,6 +172,8 @@ Includes following types:
 
 ### _Configuration.java_
 
+    import ...
+
     class Configuration
     {
         private final String tmpDir;
@@ -248,6 +250,8 @@ Includes following types:
                 }
             }
         }
+
+        // Getters omitted
     }
 
 ### _Host.java_ and _Connector.java_ are omitted
