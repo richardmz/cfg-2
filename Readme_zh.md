@@ -27,7 +27,7 @@ map1
   ...
 }
 
-# 列表（List）可以是映射列表（Map List）、字符串列表（String List）或列表列表（List List）
+# 列表（List）可以是图列表（Map List）、字符串列表（String List）或列表列表（List List）
 # 列表中的元件（Element）必须是匿名的，即没有键（Key）的。
 mapList1
 [
@@ -65,14 +65,14 @@ listList1
 * Map - 由英文花括号环绕（例如 {...}）
 * List - 由英文方括号环绕（例如 \[...\]）
 
-### Rules
+### 规则
 
 * 一个配置（Configuration）的根节点必须是一个没有花括号的映射图（Map）。
 * 图（Map）的每个条目（Entry）必须是键（Key）值（Value）对。
 * 列表（List）的每个元件（Element）必须且只能是同类型的值（Value）。
 * 字符串（String）必须由英文双引号环绕。
 
-## How to use
+## 使用方法
 
 1. 作为 [第三方 JARs 安装](https://maven.apache.org/guides/mini/guide-3rd-party-jars-local.html) 进你的 Maven 库。
 
@@ -267,7 +267,7 @@ class Configuration
 }
 ```
 
-### _Host.java_ and _Connector.java_ are omitted
+### _Host.java_ 和 _Connector.java_ 不再赘述
 
 ## 许可
 
