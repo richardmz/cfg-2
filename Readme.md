@@ -60,18 +60,18 @@ listList1
 ]
 ```
 
-### Rules
-
-* The root of a configuration file is a map without braces.
-* Each entry of a map is a key-value pair.
-* Each element of a list must only be same type of value.
-* String must be surrounded by quotes.
-
 ### Value types
 
-* String - "..."
-* Map - {...}
-* List - \[...\]
+* String - Surrounded by quotes (e.g. "...")
+* Map - Surrounded by braces (e.g. {...})
+* List - Surrounded by brackets (e.g. \[...\])
+
+### Rules
+
+* The root of a configuration must be a map without braces.
+* Each entry of a map must be a key-value pair.
+* Each element of a list must only be same type of value.
+* String must be surrounded by quotes.
 
 ## How to use
 
