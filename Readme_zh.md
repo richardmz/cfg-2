@@ -156,7 +156,12 @@ catch (IOException | ConfigException e)
 * _PROPERTY_ - 只在解析过程出现，解析结果中已被消除。
 
 
-## 消化示例### _server-config.cfg_
+## 消化示例
+
+演示如何消化从 _server.cfg_ 文件加载出来的 _fly.dream.cfg.Config_ 实例。具体消化代码在下方 _Configuration.java_ 的构造函数中。
+
+
+### _server.cfg_
 
 ```
 tmp.dir "custom-temp-dir"
@@ -208,13 +213,13 @@ class Configuration
     // 可将 Exception 换成一些更合适的子类
     Configuration(Config config) throws Exception
     {
-        String key = "tmp.dir";
-        if (config.contains(key))
+        final String TMP_DIR = "tmp.dir";
+        if (config.contains(TMP_DIR))
         {
-            Item item = config.get(key);
+            Item item = config.get(TMP_DIR);
             if (item.getType() != STRING)
             {
-                throw new Exception("Type of '" + key + "' must be STRING");
+                throw new Exception("Type of '" + TMP_DIR + "' must be STRING");
             }
             else
             {
@@ -226,17 +231,17 @@ class Configuration
             this.tmpDir = System.getProperty("user.dir") + File.separator + "temp";
         }
 
-        key = "hosts";
-        if (!config.contains(key))
+        final String HOSTS = "hosts";
+        if (!config.contains(HOSTS))
         {
-            throw new Exception("'" + key + "' is required");
+            throw new Exception("'" + HOSTS + "' is required");
         }
         else
         {
-            Item item = config.get(key);
+            Item item = config.get(HOSTS);
             if (item.getType() != MAP)
             {
-                throw new Exception("Type of '" + key + "' must be MAP");
+                throw new Exception("Type of '" + HOSTS + "' must be MAP");
             }
             else
             {
@@ -248,17 +253,17 @@ class Configuration
             }
         }
 
-        key = "connectors";
-        if (!config.contains(key))
+        final String CONNECTORS = "connectors";
+        if (!config.contains(CONNECTORS))
         {
-            throw new Exception("'" + key + "' is required");
+            throw new Exception("'" + CONNECTORS + "' is required");
         }
         else
         {
-            Item item = config.get(key);
+            Item item = config.get(CONNECTORS);
             if (item.getType() != LIST)
             {
-                throw new Exception("Type of '" + key + "' must be LIST");
+                throw new Exception("Type of '" + CONNECTORS + "' must be LIST");
             }
             else
             {

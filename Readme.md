@@ -3,6 +3,7 @@
 Unlike XML, cfg-2 does not support any digester-rule. It only supports parsing a configuration file into a
 _fly.dream.cfg.Config_ object. Digesting jobs are left to the programmers.
 
+
 ## Format
 
 ### Stereotype
@@ -60,11 +61,13 @@ listList1
 ]
 ```
 
+
 ### Value types
 
 * String - Surrounded by quotes (e.g. "...")
 * Map - Surrounded by braces (e.g. {...})
 * List - Surrounded by brackets (e.g. \[...\])
+
 
 ### Rules
 
@@ -72,6 +75,7 @@ listList1
 * Each entry of a map must be a key-value pair.
 * Each element of a list must only be same type of value.
 * String must be surrounded by quotes.
+
 
 ## How to use
 
@@ -103,23 +107,28 @@ catch (IOException | ConfigException e)
 }
 ```
 
+
 ## API
 
 ### _fly.dream.cfg.Loader_
 
 Its instances can be used to load configuration data from the specified file into a _fly.dream.cfg.Config_ object.
 
+
 #### Constructor
 
 * _Loader(Path path)_ - Constructs a loader with the specified path of file.
-  
+
+
 #### Method
 
 * _Config load()_ - Returns the _fly.dream.cfg.Config_ object parsed from the specified file.
 
+
 ### _fly.dream.cfg.Config_
 
 Represents the root element of the configuration, and it's an anonymous map.
+
 
 #### Methods
 
@@ -127,9 +136,11 @@ Represents the root element of the configuration, and it's an anonymous map.
 * _Item get(String key)_ - Returns a _fly.dream.cfg.Item_ object to which the specified key is mapped, or _null_ if it
 contains no mapping for the key.
 
+
 ### _fly.dream.cfg.Item_
 
 An interface provides methods below:
+
 
 #### Methods
 
@@ -137,6 +148,7 @@ An interface provides methods below:
 * _String getString()_ - Returns the string value of this item if its type is _STRING_, or throws a runtime exception.
 * _Map<String, Item> getMap()_ - Returns the map value of this item if its type is _MAP_, or throws a runtime exception.
 * _List<Item> getList()_ - Returns the list value of this item if its type is _LIST_, or throws a runtime exception.
+
 
 ### _fly.dream.cfg.ItemType_
 
@@ -147,9 +159,14 @@ Includes following types:
 * _LIST_
 * _PROPERTY_ - Only appears in the parsing process. Eliminated in the parse result.
 
+
 ## Digest example
 
-### _server-config.cfg_
+Shows how to write digesting code (in the constructor of _Configuration.java_ below) to digest the
+_fly.dream.cfg.Config_ instance loaded from the _server.cfg_ file below.
+
+
+### _server.cfg_
 
 ```
 tmp.dir "custom-temp-dir"
@@ -185,6 +202,7 @@ connectors
 ]
 ```
 
+
 ### _Configuration.java_
 
 ```java
@@ -200,13 +218,13 @@ class Configuration
     // Exception can be substituted to more proper subclasses
     Configuration(Config config) throws Exception
     {
-        String key = "tmp.dir";
-        if (config.contains(key))
+        final String TMP_DIR = "tmp.dir";
+        if (config.contains(TMP_DIR))
         {
-            Item item = config.get(key);
+            Item item = config.get(TMP_DIR);
             if (item.getType() != STRING)
             {
-                throw new Exception("Type of '" + key + "' must be STRING");
+                throw new Exception("Type of '" + TMP_DIR + "' must be STRING");
             }
             else
             {
@@ -218,17 +236,17 @@ class Configuration
             this.tmpDir = System.getProperty("user.dir") + File.separator + "temp";
         }
 
-        key = "hosts";
-        if (!config.contains(key))
+        final String HOSTS = "hosts";
+        if (!config.contains(HOSTS))
         {
-            throw new Exception("'" + key + "' is required");
+            throw new Exception("'" + HOSTS + "' is required");
         }
         else
         {
-            Item item = config.get(key);
+            Item item = config.get(HOSTS);
             if (item.getType() != MAP)
             {
-                throw new Exception("Type of '" + key + "' must be MAP");
+                throw new Exception("Type of '" + HOSTS + "' must be MAP");
             }
             else
             {
@@ -240,17 +258,17 @@ class Configuration
             }
         }
 
-        key = "connectors";
-        if (!config.contains(key))
+        final String CONNECTORS = "connectors";
+        if (!config.contains(CONNECTORS))
         {
-            throw new Exception("'" + key + "' is required");
+            throw new Exception("'" + CONNECTORS + "' is required");
         }
         else
         {
-            Item item = config.get(key);
+            Item item = config.get(CONNECTORS);
             if (item.getType() != LIST)
             {
-                throw new Exception("Type of '" + key + "' must be LIST");
+                throw new Exception("Type of '" + CONNECTORS + "' must be LIST");
             }
             else
             {
@@ -267,7 +285,9 @@ class Configuration
 }
 ```
 
+
 ### _Host.java_ and _Connector.java_ are omitted
+
 
 ## License
 
