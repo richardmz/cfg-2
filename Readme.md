@@ -1,7 +1,7 @@
 # cfg-2 - Another configuration format with parser and API
 
 Unlike XML, cfg-2 does not support any digester-rule. It only supports parsing a configuration file into a
-fly.dream.cfg.Config object. Digesting jobs are left to the programmers.
+_fly.dream.cfg.Config_ object. Digesting jobs are left to the programmers.
 
 ## Format
 
@@ -27,7 +27,7 @@ fly.dream.cfg.Config object. Digesting jobs are left to the programmers.
       ...
     }
     
-    # A list can be either a map list, a string list or a list list.
+    # A list can either be a map list, a string list or a list list.
     # Elements of a list must be anonymous, that they're not key specified.
     mapList1
     [
@@ -116,13 +116,18 @@ contains no mapping for the key.
 
 ### _fly.dream.cfg.Item_
 
+An interface provides methods below:
+
 #### Methods
 
 * _ItemType getType()_
-* _Item getValue()_
 * _String getString()_
 * _Map<String, Item> getMap()_
 * _List<Item> getList()_
+
+#### Methods not for API
+
+* _Item getValue()_
 * _String toString(int lvl)_
 
 ## License
