@@ -10,7 +10,7 @@ public enum Context
     /**
      * Accepts 'STRING' (END), '{' (OBJECT) and '[' (LIST)
      */
-    PROPERTY,
+    ENTRY,
 
     /**
      * Accepts 'KEY' and '}' (END)

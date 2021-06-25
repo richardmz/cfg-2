@@ -1,6 +1,6 @@
 package fly.dream.cfg;
 
-interface Property
+interface Entry
 {
     Item getValue();
 }

@@ -11,8 +11,8 @@ class ConfigBuilder
     /**
      * Only accept the following types of {@code SemiItem}:
      * <ul>
-     *     <li>PROPERTY</li>
-     *     <li>OBJECT</li>
+     *     <li>ENTRY</li>
+     *     <li>MAP</li>
      *     <li>LIST</li>
      * </ul>
      */
@@ -27,12 +27,12 @@ class ConfigBuilder
     }
 
 
-    void pushProperty(String key)
+    void pushEntry(String key)
     {
         semiItemStack.push(new SemiItem(key));
     }
 
-    void pushObject()
+    void pushMap()
     {
         semiItemStack.push(new SemiItem(MAP));
     }
@@ -42,45 +42,45 @@ class ConfigBuilder
         semiItemStack.push(new SemiItem(LIST));
     }
 
-    void finishProperty(String value)
+    void finishEntry(String value)
     {
-        SemiItem semiProperty = semiItemStack.pop();
-        Item property = semiProperty.finishProperty(value);
+        SemiItem semiEntry = semiItemStack.pop();
+        Item entry = semiEntry.finishEntry(value);
         switch (peekType())
         {
             case MAP:
-                SemiItem semiObject = semiItemStack.peek();
-                assert semiObject != null : "Stack should not be empty";
-                semiObject.put(semiProperty.getKey(), ((Property) property).getValue());
+                SemiItem semiMap = semiItemStack.peek();
+                assert semiMap != null : "Stack should not be empty";
+                semiMap.put(semiEntry.getKey(), ((Entry) entry).getValue());
                 break;
-            case PROPERTY:
+            case ENTRY:
             case LIST:
             default: // STRING
-                throw new IllegalStateException("Property value should only be in an 'OBJECT'");
+                throw new IllegalStateException("Entry value should only be in an 'MAP'");
         }
     }
 
-    void finishObject()
+    void finishMap()
     {
-        SemiItem semiObject = semiItemStack.pop();
-        Item object = semiObject.finishObject();
+        SemiItem semiMap = semiItemStack.pop();
+        Item map = semiMap.finishMap();
         switch (peekType())
         {
-            case PROPERTY:
-                SemiItem semiProperty = semiItemStack.pop();
-                Item property = semiProperty.finishProperty(object);
+            case ENTRY:
+                SemiItem semiEntry = semiItemStack.pop();
+                Item entry = semiEntry.finishEntry(map);
                 SemiItem parentItem = semiItemStack.peek();
                 assert parentItem != null : "Stack should not be empty";
-                parentItem.put(semiProperty.getKey(), ((Property) property).getValue());
+                parentItem.put(semiEntry.getKey(), ((Entry) entry).getValue());
                 break;
             case LIST:
                 SemiItem semiList = semiItemStack.peek();
                 assert semiList != null : "Stack should not be empty";
-                semiList.add(object);
+                semiList.add(map);
                 break;
             case MAP:
             default: // STRING
-                throw new IllegalStateException("Object value should only be in either a 'PROPERTY' or a 'LIST'");
+                throw new IllegalStateException("MAP value should only be in either a 'ENTRY' or a 'LIST'");
         }
     }
 
@@ -90,12 +90,12 @@ class ConfigBuilder
         Item list = semiList.finishList();
         switch (peekType())
         {
-            case PROPERTY:
-                SemiItem semiProperty = semiItemStack.pop();
-                Item property = semiProperty.finishProperty(list);
+            case ENTRY:
+                SemiItem semiEntry = semiItemStack.pop();
+                Item entry = semiEntry.finishEntry(list);
                 SemiItem parentItem = semiItemStack.peek();
                 assert parentItem != null : "Stack should not be empty";
-                parentItem.put(semiProperty.getKey(), ((Property) property).getValue());
+                parentItem.put(semiEntry.getKey(), ((Entry) entry).getValue());
                 break;
             case LIST:
                 SemiItem parentList = semiItemStack.peek();
@@ -104,7 +104,7 @@ class ConfigBuilder
                 break;
             case MAP:
             default: // STRING
-                throw new IllegalStateException("List value should only be in either a 'PROPERTY' or a 'LIST'");
+                throw new IllegalStateException("List value should only be in either a 'ENTRY' or a 'LIST'");
         }
     }
 
@@ -125,11 +125,11 @@ class ConfigBuilder
      * @return The current context of the {@code semiItemStack}. Possible types:
      * <ul>
      *     <li>ROOT</li>
-     *     <li>PROPERTY</li>
+     *     <li>ENTRY</li>
      *     <li>MAP</li>
      *     <li>LIST</li>
      *     <li>STRING_LIST</li>
-     *     <li>OBJECT_LIST</li>
+     *     <li>MAP_LIST</li>
      *     <li>LIST_LIST</li>
      * </ul>
      */
@@ -151,8 +151,8 @@ class ConfigBuilder
             ItemType type = topItem.getType();
             switch (type)
             {
-                case PROPERTY:
-                    return Context.PROPERTY;
+                case ENTRY:
+                    return Context.ENTRY;
                 case MAP:
                     return Context.MAP;
                 case LIST:
@@ -170,8 +170,8 @@ class ConfigBuilder
                                 return Context.MAP_LIST;
                             case LIST:
                                 return Context.LIST_LIST;
-                            default: // PROPERTY
-                                throw new IllegalStateException("Should not add any 'PROPERTY' type semi-item to the element list");
+                            default: // ENTRY
+                                throw new IllegalStateException("Should not add any 'ENTRY' type semi-item to the element list");
                         }
                     }
                 default: // STRING

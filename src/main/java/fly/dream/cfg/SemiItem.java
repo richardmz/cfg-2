@@ -34,7 +34,7 @@ class SemiItem
                 this.elements = new ArrayList<>();
                 this.properties = null;
                 break;
-            default: // PROPERTY
+            default: // ENTRY
                 this.elements = null;
                 this.properties = null;
                 break;
@@ -42,13 +42,13 @@ class SemiItem
     }
 
     /**
-     * Constructs a semi-item with type value equals 'PROPERTY'
-     * @param key The key of the property
+     * Constructs a semi-item with type value equals 'ENTRY'
+     * @param key The key of the entry
      */
     SemiItem(String key)
     {
         this.key = key;
-        this.type = PROPERTY;
+        this.type = ENTRY;
         this.elements = null;
         this.properties = null;
     }
@@ -64,11 +64,11 @@ class SemiItem
         return properties;
     }
 
-    void put(String key, Item property)
+    void put(String key, Item value)
     {
         assert type == MAP;
         assert properties != null;
-        properties.put(key, property);
+        properties.put(key, value);
     }
 
     boolean isEmpty()
@@ -92,19 +92,19 @@ class SemiItem
         return elements.add(element);
     }
 
-    Item finishProperty(String value)
+    Item finishEntry(String value)
     {
-        assert type == PROPERTY;
-        return new PropertyItem(value);
+        assert type == ENTRY;
+        return new EntryItem(value);
     }
 
-    Item finishProperty(Item value)
+    Item finishEntry(Item value)
     {
-        assert type == PROPERTY;
-        return new PropertyItem(value);
+        assert type == ENTRY;
+        return new EntryItem(value);
     }
 
-    Item finishObject()
+    Item finishMap()
     {
         assert type == MAP;
         return new MapItem(properties);
@@ -118,7 +118,7 @@ class SemiItem
 
     String getKey()
     {
-        assert type == PROPERTY;
+        assert type == ENTRY;
         return key;
     }
 }

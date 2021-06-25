@@ -3,18 +3,18 @@ package fly.dream.cfg;
 import java.util.List;
 import java.util.Map;
 
-import static fly.dream.cfg.ItemType.PROPERTY;
+import static fly.dream.cfg.ItemType.ENTRY;
 
-public class PropertyItem implements Item, Property, Printable
+public class EntryItem implements Item, Entry, Printable
 {
     private final Item value;
 
-    PropertyItem(String str)
+    EntryItem(String str)
     {
         this.value = new StringItem(str);
     }
 
-    PropertyItem(Item value)
+    EntryItem(Item value)
     {
         this.value = value;
     }
@@ -22,7 +22,7 @@ public class PropertyItem implements Item, Property, Printable
     @Override
     public ItemType getType()
     {
-        return PROPERTY;
+        return ENTRY;
     }
 
     @Override
@@ -34,19 +34,19 @@ public class PropertyItem implements Item, Property, Printable
     @Override
     public String getString()
     {
-        throw new RuntimeException("Should not get string from a " + PROPERTY);
+        throw new RuntimeException("Should not get string from a " + ENTRY);
     }
 
     @Override
     public Map<String, Item> getMap()
     {
-        throw new RuntimeException("Should not get object from a " + PROPERTY);
+        throw new RuntimeException("Should not get object from a " + ENTRY);
     }
 
     @Override
     public List<Item> getList()
     {
-        throw new RuntimeException("Should not get list from a " + PROPERTY);
+        throw new RuntimeException("Should not get list from a " + ENTRY);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class PropertyItem implements Item, Property, Printable
             return false;
         }
 
-        PropertyItem propertyItem = (PropertyItem) o;
+        EntryItem propertyItem = (EntryItem) o;
 
         return value.equals(propertyItem.value);
     }

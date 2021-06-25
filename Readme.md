@@ -157,7 +157,7 @@ Includes following types:
 * _STRING_
 * _MAP_
 * _LIST_
-* _PROPERTY_ - Only appears in the parsing process. Eliminated in the parse result.
+* _ENTRY_ - Only appears in the parsing process. Eliminated in the parse result.
 
 
 ## Digest example

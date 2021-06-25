@@ -78,7 +78,7 @@ class Parser
             case LIST_LIST:
                 croak("'[' or ']' expected but got: " + token);
                 break;
-            case PROPERTY:
+            case ENTRY:
                 croak("'STRING', '{' or '[' expected but got: " + token);
                 break;
             case LIST:
@@ -89,7 +89,7 @@ class Parser
                 break;
             case MAP:
             case ROOT:
-                builder.pushProperty(key);
+                builder.pushEntry(key);
                 break;
         }
     }
@@ -99,8 +99,8 @@ class Parser
         String str = token.getString();
         switch (builder.getContext())
         {
-            case PROPERTY:
-                builder.finishProperty(str);
+            case ENTRY:
+                builder.finishEntry(str);
                 break;
             case LIST:
             case STRING_LIST:
@@ -144,10 +144,10 @@ class Parser
     {
         switch (builder.getContext())
         {
-            case PROPERTY:
+            case ENTRY:
             case LIST:
             case MAP_LIST:
-                builder.pushObject();
+                builder.pushMap();
                 break;
             case LIST_LIST:
                 croak("'[' or ']' expected but got: " + token);
@@ -169,9 +169,9 @@ class Parser
         switch (builder.getContext())
         {
             case MAP:
-                builder.finishObject();
+                builder.finishMap();
                 break;
-            case PROPERTY:
+            case ENTRY:
                 croak("'STRING', '{' or '[' expected but got: " + token);
                 break;
             case LIST:
@@ -196,7 +196,7 @@ class Parser
     {
         switch (builder.getContext())
         {
-            case PROPERTY:
+            case ENTRY:
             case LIST:
             case LIST_LIST:
                 builder.pushList();
@@ -226,7 +226,7 @@ class Parser
             case LIST_LIST:
                 builder.finishList();
                 break;
-            case PROPERTY:
+            case ENTRY:
                 croak("'STRING', '{' or '[' expected but got: " + token);
                 break;
             case MAP:

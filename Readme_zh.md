@@ -153,7 +153,7 @@ catch (IOException | ConfigException e)
 * _STRING_
 * _MAP_
 * _LIST_
-* _PROPERTY_ - 只在解析过程出现，解析结果中已被消除。
+* _ENTRY_ - 只在解析过程出现，解析结果中已被消除。
 
 
 ## 消化示例
