@@ -213,65 +213,80 @@ class Configuration
     // 可将 Exception 换成一些更合适的子类
     Configuration(Config config) throws Exception
     {
-        final String TMP_DIR = "tmp.dir";
-        if (config.contains(TMP_DIR))
+        this.tmpDir = getTmpDir(config);
+        this.hosts = getHosts(config);
+        this.connectors = getConnectors(config);
+    }
+
+    private String getTmpDir(Config config) throws Exception
+    {
+        String key = "tmp.dir";
+        if (config.contains(key))
         {
-            Item item = config.get(TMP_DIR);
+            Item item = config.get(key);
             if (item.getType() != STRING)
             {
-                throw new Exception("Type of '" + TMP_DIR + "' must be STRING");
+                throw new Exception("Type of '" + key + "' must be STRING");
             }
             else
             {
-                this.tmpDir = item.getString();
+                return item.getString();
             }
         }
         else
         {
-            this.tmpDir = System.getProperty("user.dir") + File.separator + "temp";
+            return System.getProperty("user.dir") + File.separator + "temp";
         }
+    }
 
-        final String HOSTS = "hosts";
-        if (!config.contains(HOSTS))
+    private Map<String, Host> getHosts(Config config) throws Exception
+    {
+        String key = "hosts";
+        if (!config.contains(key))
         {
-            throw new Exception("'" + HOSTS + "' is required");
+            throw new Exception("'" + key + "' is required");
         }
         else
         {
-            Item item = config.get(HOSTS);
+            Item item = config.get(key);
             if (item.getType() != MAP)
             {
-                throw new Exception("Type of '" + HOSTS + "' must be MAP");
+                throw new Exception("Type of '" + key + "' must be MAP");
             }
             else
             {
-                hosts = new HashMap<String, Host>(1);
+                Map<String, Host> hosts = new HashMap<String, Host>(1);
                 for (Map.Entry<String, Item> entry : item.getMap().entrySet())
                 {
                     hosts.put(entry.getKey(), new Host(entry.getValue()));
                 }
+                return hosts;
             }
         }
+    }
 
-        final String CONNECTORS = "connectors";
-        if (!config.contains(CONNECTORS))
+    private List<Connector> getConnectors(Config config) throws Exception
+    {
+        String key = "connectors";
+        if (!config.contains(key))
         {
-            throw new Exception("'" + CONNECTORS + "' is required");
+            throw new Exception("'" + key + "' is required");
         }
         else
         {
-            Item item = config.get(CONNECTORS);
+            Item item = config.get(key);
             if (item.getType() != LIST)
             {
-                throw new Exception("Type of '" + CONNECTORS + "' must be LIST");
+                throw new Exception("Type of '" + key + "' must be LIST");
             }
             else
             {
-                connectors = new ArrayList<Connector>(2);
+                List<Connector> connectors = new ArrayList<Connector>(2);
                 for (Item i : item.getList())
                 {
                     connectors.add(new Connector(i));
                 }
+                return connectors;
             }
         }
     }
