@@ -77,37 +77,6 @@ listList1
 * String must be surrounded by quotes.
 
 
-## How to use
-
-1. [Install it as 3rd party JARs](https://maven.apache.org/guides/mini/guide-3rd-party-jars-local.html) to your maven repository.
-
-2. Add it to your project via pom.xml.
-
-```xml
-<dependency>
-    <groupId>fly.dream</groupId>
-    <artifactId>cfg</artifactId>
-    <version>2</version>
-</dependency>
-```
-
-3. Java code
-
-```java
-Path file = ...
-try
-{
-    Loader loader = new Loader(file);
-    Config config = loader.load();
-    ...
-}
-catch (IOException | ConfigException e)
-{
-    ...
-}
-```
-
-
 ## API
 
 ### _fly.dream.cfg.Loader_
@@ -158,6 +127,37 @@ Includes following types:
 * _MAP_
 * _LIST_
 * _ENTRY_ - Only appears in the parsing process. Eliminated in the parse result.
+
+
+## How to use
+
+1. [Install it as 3rd party JARs](https://maven.apache.org/guides/mini/guide-3rd-party-jars-local.html) to your maven repository.
+
+2. Add it to your project via pom.xml.
+
+```xml
+<dependency>
+    <groupId>fly.dream</groupId>
+    <artifactId>cfg</artifactId>
+    <version>2</version>
+</dependency>
+```
+
+3. Java code
+
+```java
+Path file = ...
+try
+{
+    Loader loader = new Loader(file);
+    Config config = loader.load();
+    ...
+}
+catch (IOException | ConfigException e)
+{
+    ...
+}
+```
 
 
 ## Digest example

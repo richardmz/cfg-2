@@ -76,37 +76,6 @@ listList1
 * 字符串（String）必须由英文双引号环绕。
 
 
-## 使用方法
-
-1. 作为 [第三方 JARs 安装](https://maven.apache.org/guides/mini/guide-3rd-party-jars-local.html) 进你的 Maven 库。
-
-2. 添加至项目的 pom.xml 中。
-
-```xml
-<dependency>
-    <groupId>fly.dream</groupId>
-    <artifactId>cfg</artifactId>
-    <version>2</version>
-</dependency>
-```
-
-3. Java 代码
-
-```java
-Path file = ...
-try
-{
-    Loader loader = new Loader(file);
-    Config config = loader.load();
-    ...
-}
-catch (IOException | ConfigException e)
-{
-    ...
-}
-```
-
-
 ## API
 
 ### _fly.dream.cfg.Loader_
@@ -154,6 +123,37 @@ catch (IOException | ConfigException e)
 * _MAP_
 * _LIST_
 * _ENTRY_ - 只在解析过程出现，解析结果中已被消除。
+
+
+## 使用方法
+
+1. 作为 [第三方 JARs 安装](https://maven.apache.org/guides/mini/guide-3rd-party-jars-local.html) 进你的 Maven 库。
+
+2. 添加至项目的 pom.xml 中。
+
+```xml
+<dependency>
+    <groupId>fly.dream</groupId>
+    <artifactId>cfg</artifactId>
+    <version>2</version>
+</dependency>
+```
+
+3. Java 代码
+
+```java
+Path file = ...
+try
+{
+    Loader loader = new Loader(file);
+    Config config = loader.load();
+    ...
+}
+catch (IOException | ConfigException e)
+{
+    ...
+}
+```
 
 
 ## 消化示例
