@@ -79,7 +79,7 @@ listList1
 
 ## API
 
-### _fly.dream.cfg.Loader_
+### Class _fly.dream.cfg.Loader_
 
 Its instances can be used to load configuration data from the specified file into a _fly.dream.cfg.Config_ object.
 
@@ -94,7 +94,7 @@ Its instances can be used to load configuration data from the specified file int
 * _Config load()_ - Returns the _fly.dream.cfg.Config_ object parsed from the specified file.
 
 
-### _fly.dream.cfg.Config_
+### Class _fly.dream.cfg.Config_
 
 Represents the root element of the configuration, and it's an anonymous map.
 
@@ -106,7 +106,7 @@ Represents the root element of the configuration, and it's an anonymous map.
 contains no mapping for the key.
 
 
-### _fly.dream.cfg.Item_
+### Interface _fly.dream.cfg.Item_
 
 An interface provides methods below:
 
@@ -119,7 +119,7 @@ An interface provides methods below:
 * _List<Item> getList()_ - Returns the list value of this item if its type is _LIST_, or throws a runtime exception.
 
 
-### _fly.dream.cfg.ItemType_
+### Enum _fly.dream.cfg.ItemType_
 
 Includes following types:
 

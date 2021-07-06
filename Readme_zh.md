@@ -78,7 +78,7 @@ listList1
 
 ## API
 
-### _fly.dream.cfg.Loader_
+### Class _fly.dream.cfg.Loader_
 
 可用其实例（Instance）将指定文件中的配置数据加载为 _fly.dream.cfg.Config_ 对象。
 
@@ -93,7 +93,7 @@ listList1
 * _Config load()_ - 返回由指定文件解析出来的 _fly.dream.cfg.Config_ 对象。
 
 
-### _fly.dream.cfg.Config_
+### Class _fly.dream.cfg.Config_
 
 代表配置的根元件，同时是个匿名映射图。
 
@@ -103,7 +103,7 @@ listList1
 * _boolean contains(String key)_ - 如果含有指定 key 对应的条目，则返回 _true_。
 * _Item get(String key)_ - 如果含有指定 key 对应的 _fly.dream.cfg.Item_ 对象，则将该对象返回，否则返回 _null_。
 
-### _fly.dream.cfg.Item_
+### Interface _fly.dream.cfg.Item_
 
 提供以下方法：
 
@@ -115,7 +115,7 @@ listList1
 * _Map<String, Item> getMap()_ - 如果该实例的类型为 MAP，则返回映射图，否则抛出运行时异常。
 * _List<Item> getList()_ - 如果该实例的类型为 LIST，则返回列表，否则抛出运行时异常。
 
-### _fly.dream.cfg.ItemType_
+### Enum _fly.dream.cfg.ItemType_
 
 包括以下类型：
 
