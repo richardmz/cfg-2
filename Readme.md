@@ -160,9 +160,9 @@ catch (IOException | ConfigException e)
 ```
 
 
-## Digest example
+## Digestion example
 
-Shows how to write digesting code (in the constructor of _Configuration.java_ below) to digest the
+Shows how to write code (see the constructor of _Configuration.java_ below) to digest the
 _fly.dream.cfg.Config_ instance loaded from the _server.cfg_ file below.
 
 
@@ -214,7 +214,7 @@ class Configuration
     private final Map<String, Host> hosts;
     private final List<Connector> connectors;
 
-    // Digesting can go in constructor
+    // Digestion can go in constructor
     // Exception can be substituted to more proper subclasses
     Configuration(Config config) throws Exception
     {

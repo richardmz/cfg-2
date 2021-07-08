@@ -301,4 +301,4 @@ class Configuration
 
 ## 许可
 
-Apache 2.0 许可. 见 LICENSE 文件.
+Apache 2.0 许可。见 LICENSE 文件。
