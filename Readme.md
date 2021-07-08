@@ -1,7 +1,7 @@
 # cfg-2 - Another configuration format with parser and API
 
 Unlike XML, cfg-2 does not support any digester-rule. It only supports parsing a configuration file into a
-_fly.dream.cfg.Config_ object. Digesting jobs are left to the programmers.
+_fly.dream.cfg.Config_ object. Digestions left to the programmers.
 
 
 ## Format
