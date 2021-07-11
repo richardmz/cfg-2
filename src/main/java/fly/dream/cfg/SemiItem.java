@@ -17,7 +17,7 @@ class SemiItem
 
     private final List<Item> elements;
 
-    private final Map<String, Item> properties;
+    private final Map<String, Item> entries;
 
 
     SemiItem(@NotNull ItemType type)
@@ -27,16 +27,16 @@ class SemiItem
         switch (type)
         {
             case MAP:
-                this.properties = new HashMap<>();
+                this.entries = new HashMap<>();
                 this.elements = null;
                 break;
             case LIST:
                 this.elements = new ArrayList<>();
-                this.properties = null;
+                this.entries = null;
                 break;
             default: // ENTRY
                 this.elements = null;
-                this.properties = null;
+                this.entries = null;
                 break;
         }
     }
@@ -50,7 +50,7 @@ class SemiItem
         this.key = key;
         this.type = ENTRY;
         this.elements = null;
-        this.properties = null;
+        this.entries = null;
     }
 
 
@@ -59,16 +59,16 @@ class SemiItem
         return type;
     }
 
-    Map<String, Item> getProperties()
+    Map<String, Item> getEntries()
     {
-        return properties;
+        return entries;
     }
 
     void put(String key, Item value)
     {
         assert type == MAP;
-        assert properties != null;
-        properties.put(key, value);
+        assert entries != null;
+        entries.put(key, value);
     }
 
     boolean isEmpty()
@@ -107,7 +107,7 @@ class SemiItem
     Item finishMap()
     {
         assert type == MAP;
-        return new MapItem(properties);
+        return new MapItem(entries);
     }
 
     Item finishList()

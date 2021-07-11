@@ -118,7 +118,7 @@ class ConfigBuilder
     Config toConfig()
     {
         SemiItem root = semiItemStack.getFirst();
-        return new Config(root.getProperties());
+        return new Config(root.getEntries());
     }
 
     /**
