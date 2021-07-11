@@ -72,7 +72,7 @@ listList1
 
 * 一个配置（Configuration）的根节点必须是一个没有花括号的映射图（Map）。
 * 映射图（Map）的每个条目（Entry）必须是键（Key）值（Value）对。
-* 列表（List）的每个元件（Element）必须且只能是同类型的值（Value）。
+* 列表（List）中每个元件（Element）的类型必须相同。
 * 字符串（String）必须由英文双引号环绕。
 
 
@@ -255,7 +255,7 @@ class Configuration
             }
             else
             {
-                Map<String, Host> hosts = new HashMap<String, Host>(1);
+                Map<String, Host> hosts = new HashMap<>(1);
                 for (Map.Entry<String, Item> entry : item.getMap().entrySet())
                 {
                     hosts.put(entry.getKey(), new Host(entry.getValue()));
@@ -281,7 +281,7 @@ class Configuration
             }
             else
             {
-                List<Connector> connectors = new ArrayList<Connector>(2);
+                List<Connector> connectors = new ArrayList<>(2);
                 for (Item i : item.getList())
                 {
                     connectors.add(new Connector(i));

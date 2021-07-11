@@ -73,7 +73,7 @@ listList1
 
 * The root of a configuration must be a map without braces.
 * Each entry of a map must be a key-value pair.
-* Each element of a list must only be same type of value.
+* Elements of a list must be same type.
 * String must be surrounded by quotes.
 
 
@@ -260,7 +260,7 @@ class Configuration
             }
             else
             {
-                Map<String, Host> hosts = new HashMap<String, Host>(1);
+                Map<String, Host> hosts = new HashMap<>(1);
                 for (Map.Entry<String, Item> entry : item.getMap().entrySet())
                 {
                     hosts.put(entry.getKey(), new Host(entry.getValue()));
@@ -286,7 +286,7 @@ class Configuration
             }
             else
             {
-                List<Connector> connectors = new ArrayList<Connector>(2);
+                List<Connector> connectors = new ArrayList<>(2);
                 for (Item i : item.getList())
                 {
                     connectors.add(new Connector(i));
