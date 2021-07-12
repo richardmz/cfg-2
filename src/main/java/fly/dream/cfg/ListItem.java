@@ -64,24 +64,31 @@ public class ListItem implements Item, Printable
     @Override
     public String toString(int lvl)
     {
-        StringJoiner stringJoiner;
-        switch (elements.get(0).getType())
+        if (elements.size() == 0)
         {
-            case STRING:
-                stringJoiner = new StringJoiner("\n", "\n" + Util.getIndent(lvl - 1) + "[\n", "\n" + Util.getIndent(lvl - 1) + "]");
-                break;
-            case MAP:
-            case LIST:
-                stringJoiner = new StringJoiner("", "\n" + Util.getIndent(lvl - 1) + "[", "\n" + Util.getIndent(lvl - 1) + "]");
-                break;
-            default: // PROPERTY
-                throw new IllegalStateException("ListItem should not has any 'PROPERTY' element");
+            return "\n" + Util.getIndent(lvl - 1) + "[\n" + Util.getIndent(lvl - 1) + "]";
         }
-        for (Item element : elements)
+        else
         {
-            stringJoiner.add(Util.getIndent(lvl) + ((Printable) element).toString(lvl + 1));
+            StringJoiner stringJoiner;
+            switch (elements.get(0).getType())
+            {
+                case STRING:
+                    stringJoiner = new StringJoiner("\n", "\n" + Util.getIndent(lvl - 1) + "[\n", "\n" + Util.getIndent(lvl - 1) + "]");
+                    break;
+                case MAP:
+                case LIST:
+                    stringJoiner = new StringJoiner("\n", "\n" + Util.getIndent(lvl - 1) + "[", "\n" + Util.getIndent(lvl - 1) + "]");
+                    break;
+                default: // PROPERTY
+                    throw new IllegalStateException("ListItem should not has any 'PROPERTY' element");
+            }
+            for (Item element : elements)
+            {
+                stringJoiner.add(Util.getIndent(lvl) + ((Printable) element).toString(lvl + 1));
+            }
+            return stringJoiner.toString();
         }
-        return stringJoiner.toString();
     }
 
     @Override
