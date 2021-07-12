@@ -126,7 +126,6 @@ Includes following types:
 * _STRING_
 * _MAP_
 * _LIST_
-* _ENTRY_ - Only appears in the parsing process. Eliminated in the parse result.
 
 
 ## How to use

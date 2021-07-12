@@ -1,8 +1,8 @@
 package fly.dream.cfg;
 
-public enum ItemType
+enum SemiItemType
 {
-    STRING,
+    ENTRY,
     MAP,
     LIST
 }

@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
-public class PropertyEliminationTest
+public class EntryEliminationTest
 {
     public static void main(String[] args)
     {

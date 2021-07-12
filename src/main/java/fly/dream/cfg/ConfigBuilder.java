@@ -3,8 +3,7 @@ package fly.dream.cfg;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import static fly.dream.cfg.ItemType.LIST;
-import static fly.dream.cfg.ItemType.MAP;
+import static fly.dream.cfg.SemiItemType.*;
 
 class ConfigBuilder
 {
@@ -45,13 +44,13 @@ class ConfigBuilder
     void finishEntry(String value)
     {
         SemiItem semiEntry = semiItemStack.pop();
-        Item entry = semiEntry.finishEntry(value);
+        Entry entry = semiEntry.finishEntry(value);
         switch (peekType())
         {
             case MAP:
                 SemiItem semiMap = semiItemStack.peek();
                 assert semiMap != null : "Stack should not be empty";
-                semiMap.put(semiEntry.getKey(), ((Entry) entry).getValue());
+                semiMap.put(semiEntry.getKey(), entry.getValue());
                 break;
             case ENTRY:
             case LIST:
@@ -68,10 +67,10 @@ class ConfigBuilder
         {
             case ENTRY:
                 SemiItem semiEntry = semiItemStack.pop();
-                Item entry = semiEntry.finishEntry(map);
+                Entry entry = semiEntry.finishEntry(map);
                 SemiItem parentItem = semiItemStack.peek();
                 assert parentItem != null : "Stack should not be empty";
-                parentItem.put(semiEntry.getKey(), ((Entry) entry).getValue());
+                parentItem.put(semiEntry.getKey(), entry.getValue());
                 break;
             case LIST:
                 SemiItem semiList = semiItemStack.peek();
@@ -92,10 +91,10 @@ class ConfigBuilder
         {
             case ENTRY:
                 SemiItem semiEntry = semiItemStack.pop();
-                Item entry = semiEntry.finishEntry(list);
+                Entry entry = semiEntry.finishEntry(list);
                 SemiItem parentItem = semiItemStack.peek();
                 assert parentItem != null : "Stack should not be empty";
-                parentItem.put(semiEntry.getKey(), ((Entry) entry).getValue());
+                parentItem.put(semiEntry.getKey(), entry.getValue());
                 break;
             case LIST:
                 SemiItem parentList = semiItemStack.peek();
@@ -148,7 +147,7 @@ class ConfigBuilder
         {
             SemiItem topItem = semiItemStack.peek();
             assert topItem != null;
-            ItemType type = topItem.getType();
+            SemiItemType type = topItem.getType();
             switch (type)
             {
                 case ENTRY:
@@ -180,7 +179,7 @@ class ConfigBuilder
         }
     }
 
-    ItemType peekType()
+    SemiItemType peekType()
     {
         if (semiItemStack.size() == 0)
         {

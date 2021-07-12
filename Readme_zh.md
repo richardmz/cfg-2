@@ -122,7 +122,6 @@ listList1
 * _STRING_
 * _MAP_
 * _LIST_
-* _ENTRY_ - 只在解析过程出现，解析结果中已被消除。
 
 
 ## 使用方法

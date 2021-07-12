@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static fly.dream.cfg.ItemType.*;
+import static fly.dream.cfg.SemiItemType.*;
 
 class SemiItem
 {
-    private final ItemType type;
+    private final SemiItemType type;
 
     private final String key;
 
@@ -20,7 +20,7 @@ class SemiItem
     private final Map<String, Item> entries;
 
 
-    SemiItem(@NotNull ItemType type)
+    SemiItem(@NotNull SemiItemType type)
     {
         this.type = type;
         this.key = null;
@@ -54,7 +54,7 @@ class SemiItem
     }
 
 
-    ItemType getType()
+    SemiItemType getType()
     {
         return type;
     }
@@ -92,16 +92,16 @@ class SemiItem
         return elements.add(element);
     }
 
-    Item finishEntry(String value)
+    Entry finishEntry(String value)
     {
         assert type == ENTRY;
-        return new EntryItem(value);
+        return new Entry(value);
     }
 
-    Item finishEntry(Item value)
+    Entry finishEntry(Item value)
     {
         assert type == ENTRY;
-        return new EntryItem(value);
+        return new Entry(value);
     }
 
     Item finishMap()
