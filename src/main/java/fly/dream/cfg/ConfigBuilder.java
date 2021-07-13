@@ -154,7 +154,7 @@ class ConfigBuilder
                     return Context.ENTRY;
                 case MAP:
                     return Context.MAP;
-                case LIST:
+                default: // LIST
                     if (topItem.isEmpty())
                     {
                         return Context.LIST;
@@ -173,8 +173,6 @@ class ConfigBuilder
                                 throw new IllegalStateException("Should not add any 'ENTRY' type semi-item to the element list");
                         }
                     }
-                default: // STRING
-                    throw new IllegalStateException("Should not push any 'STRING' type semi-item into the stack");
             }
         }
     }
