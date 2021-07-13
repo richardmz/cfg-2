@@ -9,7 +9,7 @@ import static fly.dream.cfg.Util.toHex;
 
 class TokenStream
 {
-    public final static int STRING_LIMIT = 1024;
+    final static int STRING_LIMIT = 1024;
 
     private final FileInputStream inputStream;
 
