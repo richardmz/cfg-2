@@ -54,7 +54,6 @@ class ConfigBuilder
                 break;
             case ENTRY:
             case LIST:
-            default: // STRING
                 throw new IllegalStateException("Entry value should only be in an 'MAP'");
         }
     }
@@ -78,7 +77,6 @@ class ConfigBuilder
                 semiList.add(map);
                 break;
             case MAP:
-            default: // STRING
                 throw new IllegalStateException("MAP value should only be in either a 'ENTRY' or a 'LIST'");
         }
     }
@@ -102,7 +100,6 @@ class ConfigBuilder
                 parentList.add(list);
                 break;
             case MAP:
-            default: // STRING
                 throw new IllegalStateException("List value should only be in either a 'ENTRY' or a 'LIST'");
         }
     }
