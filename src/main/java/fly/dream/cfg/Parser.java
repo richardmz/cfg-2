@@ -8,6 +8,10 @@ class Parser
     private final TokenStream tokenStream;
     private final ConfigBuilder builder;
 
+    /**
+     * Since throwing an exception will halt the parsing, use it
+     * to mark if there is any syntax error during the parsing.
+     */
     private boolean hasError;
 
     Parser(BufferedReader reader)
