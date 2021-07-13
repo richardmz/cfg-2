@@ -8,20 +8,20 @@ class FileInputStream
     private final BufferedReader reader;
     private final Position position;
 
-    public FileInputStream(BufferedReader reader)
+    FileInputStream(BufferedReader reader)
     {
         this.reader = reader;
         this.position = new Position();
     }
 
-    public char read() throws EndOfStreamException, IOException
+    char read() throws EndOfStreamException, IOException
     {
         char c = readChar();
         updatePosition(c);
         return c;
     }
 
-    public boolean endOfStream() throws IOException
+    boolean endOfStream() throws IOException
     {
         reader.mark(1);
         int c = reader.read();
@@ -29,7 +29,7 @@ class FileInputStream
         return c == -1;
     }
 
-    public char peek() throws EndOfStreamException, IOException
+    char peek() throws EndOfStreamException, IOException
     {
         reader.mark(1);
         char c = readChar();
@@ -37,13 +37,13 @@ class FileInputStream
         return c;
     }
 
-    public void skip() throws EndOfStreamException, IOException
+    void skip() throws EndOfStreamException, IOException
     {
         char c = readChar();
         updatePosition(c);
     }
 
-    public Position getPosition()
+    Position getPosition()
     {
         return position;
     }
