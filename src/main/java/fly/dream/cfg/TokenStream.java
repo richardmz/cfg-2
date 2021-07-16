@@ -18,7 +18,7 @@ class TokenStream
         this.inputStream = inputStream;
     }
 
-    Token read() throws EndOfStreamException, IOException, TokenException, UnexpectedEndOfStream
+    Token read() throws EndOfStreamException, IOException, TokenException, UnexpectedEndOfStreamException
     {
         skipSpaces();
         char c = inputStream.read();
@@ -49,7 +49,7 @@ class TokenStream
 
     // Helpers ---------------------------------------------------------------------------------------------------------
 
-    private Token readString() throws UnexpectedEndOfStream, IOException, TokenException
+    private Token readString() throws UnexpectedEndOfStreamException, IOException, TokenException
     {
         // Get position
         Position position = inputStream.getPosition();
@@ -80,7 +80,7 @@ class TokenStream
         }
         catch (EndOfStreamException e)
         {
-            throw new UnexpectedEndOfStream();
+            throw new UnexpectedEndOfStreamException();
         }
 
 
@@ -93,7 +93,7 @@ class TokenStream
         return new Token(STRING, result, position);
     }
 
-    private Token readKey(char first) throws IOException, UnexpectedEndOfStream
+    private Token readKey(char first) throws IOException, UnexpectedEndOfStreamException
     {
         StringBuilder builder = new StringBuilder();
         builder.append(first);
@@ -109,7 +109,7 @@ class TokenStream
         }
         catch (EndOfStreamException e)
         {
-            throw new UnexpectedEndOfStream();
+            throw new UnexpectedEndOfStreamException();
         }
         return new Token(KEY, builder.toString(), position);
     }

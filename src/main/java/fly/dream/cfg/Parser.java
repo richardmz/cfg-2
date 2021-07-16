@@ -46,7 +46,7 @@ class Parser
                 throw new ConfigSyntaxException();
             }
         }
-        catch (TokenException | ConfigSyntaxException | UnexpectedEndOfStream e)
+        catch (TokenException | ConfigSyntaxException | UnexpectedEndOfStreamException e)
         {
             throw new ConfigException(e);
         }
