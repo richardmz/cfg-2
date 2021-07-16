@@ -37,13 +37,13 @@ class Parser
                     break;
                 }
             }
-            if (!hasError)
+            if (hasError)
             {
-                return builder.toConfig();
+                throw new ConfigSyntaxException();
             }
             else
             {
-                throw new ConfigSyntaxException();
+                return builder.toConfig();
             }
         }
         catch (TokenException | ConfigSyntaxException | UnexpectedEndOfStreamException e)
