@@ -137,8 +137,8 @@ Includes following types:
 ```xml
 <dependency>
     <groupId>fly.dream</groupId>
-    <artifactId>cfg</artifactId>
-    <version>2</version>
+    <artifactId>cfg-2</artifactId>
+    <version>1</version>
 </dependency>
 ```
 
