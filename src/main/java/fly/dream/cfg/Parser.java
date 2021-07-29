@@ -100,15 +100,14 @@ class Parser
 
     private void handleString(Token token)
     {
-        String str = token.getString();
         switch (builder.getContext())
         {
             case ENTRY:
-                builder.finishEntry(str);
+                builder.finishEntry(token.getString());
                 break;
             case LIST:
             case STRING_LIST:
-                addListElement(str, token);
+                addListElement(token);
                 break;
             case MAP_LIST:
                 croak("'{' or ']' expected but got: " + token);
@@ -242,9 +241,9 @@ class Parser
         }
     }
 
-    private void addListElement(String str, Token token)
+    private void addListElement(Token token)
     {
-        boolean success = builder.addElement(str);
+        boolean success = builder.addElement(token.getString());
         if (!success)
         {
             tip("Duplicated value: " + token);
