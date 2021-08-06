@@ -174,7 +174,10 @@ class ConfigBuilder
         }
     }
 
-    SemiItemType peekType()
+
+    // Helper ----------------------------------------------------------------------------------------------------------
+
+    private SemiItemType peekType()
     {
         if (semiItemStack.size() == 0)
         {
