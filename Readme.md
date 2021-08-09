@@ -108,8 +108,7 @@ Represents the root element of the configuration, and it's an anonymous map.
 Type | Method | Description
 ---- | ------ | -----------
 _boolean_ | _contains(String key)_ | Returns _true_ if it contains an entry with the specified key.
-_Item_ | _get(String key)_ | Returns a _fly.dream.cfg.Item_ object to which the specified key is mapped, or _null_ if it
-contains no mapping for the key.
+_Item_ | _get(String key)_ | Returns a _fly.dream.cfg.Item_ object to which the specified key is mapped, or _null_ if it contains no mapping for the key.
 
 
 ### Interface _fly.dream.cfg.Item_
