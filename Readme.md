@@ -121,7 +121,7 @@ Type | Method | Description
 _ItemType_ | _getType()_ | Returns the type of this item.
 _String_ | _getString()_ | Returns the string value of this item if its type is _STRING_, or throws a runtime exception.
 _Map<String, Item>_ | _getMap()_ | Returns the map value of this item if its type is _MAP_, or throws a runtime exception.
-_List<Item>_ | _getList()_ | Returns the list value of this item if its type is _LIST_, or throws a runtime exception.
+_List\<Item>_ | _getList()_ | Returns the list value of this item if its type is _LIST_, or throws a runtime exception.
 
 
 ### Enum _fly.dream.cfg.ItemType_

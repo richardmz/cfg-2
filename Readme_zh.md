@@ -118,7 +118,7 @@ _Item_ | _get(String key)_ | 如果含有指定 key 对应的 _fly.dream.cfg.Ite
 _ItemType_ | _getType()_ | 返回该实例的类型。
 _String_ | _getString()_ | 如果该实例的类型为 STRING，则返回字符串值，否则抛出运行时异常。
 _Map<String, Item>_ | _getMap()_ | 如果该实例的类型为 MAP，则返回映射图，否则抛出运行时异常。
-_List<Item>_ | _getList()_ | 如果该实例的类型为 LIST，则返回列表，否则抛出运行时异常。
+_List\<Item>_ | _getList()_ | 如果该实例的类型为 LIST，则返回列表，否则抛出运行时异常。
 
 ### Enum _fly.dream.cfg.ItemType_
 
