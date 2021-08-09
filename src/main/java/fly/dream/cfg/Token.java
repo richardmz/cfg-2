@@ -34,7 +34,7 @@ class Token
 
     String getString()
     {
-        assert type == STRING || type == KEY : "Should not get char from " + type;
+        assert type == STRING || type == KEY : "Should not get string from " + type;
         return string;
     }
 
