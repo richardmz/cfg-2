@@ -86,12 +86,16 @@ Its instances can be used to load configuration data from the specified file int
 
 #### Constructor
 
-* _Loader(Path path)_ - Constructs a loader with the specified path of file.
+Constructor | Description
+----------- | -----------
+_Loader(Path path)_ | Constructs a loader with the specified path of file.
 
 
 #### Method
 
-* _Config load()_ - Returns the _fly.dream.cfg.Config_ object parsed from the specified file.
+Type | Method | Description
+---- | ------ | -----------
+_Config_ | _load()_ | Returns the _fly.dream.cfg.Config_ object parsed from the specified file.
 
 
 ### Class _fly.dream.cfg.Config_
@@ -101,22 +105,23 @@ Represents the root element of the configuration, and it's an anonymous map.
 
 #### Methods
 
-* _boolean contains(String key)_ - Returns _true_ if it contains an entry with the specified key.
-* _Item get(String key)_ - Returns a _fly.dream.cfg.Item_ object to which the specified key is mapped, or _null_ if it
+Type | Method | Description
+---- | ------ | -----------
+_boolean_ | _contains(String key)_ | Returns _true_ if it contains an entry with the specified key.
+_Item_ | _get(String key)_ | Returns a _fly.dream.cfg.Item_ object to which the specified key is mapped, or _null_ if it
 contains no mapping for the key.
 
 
 ### Interface _fly.dream.cfg.Item_
 
-An interface provides methods below:
-
-
 #### Methods
 
-* _ItemType getType()_ - Returns the type of this item.
-* _String getString()_ - Returns the string value of this item if its type is _STRING_, or throws a runtime exception.
-* _Map<String, Item> getMap()_ - Returns the map value of this item if its type is _MAP_, or throws a runtime exception.
-* _List<Item> getList()_ - Returns the list value of this item if its type is _LIST_, or throws a runtime exception.
+Type | Method | Description
+---- | ------ | -----------
+_ItemType_ | _getType()_ | Returns the type of this item.
+_String_ | _getString()_ | Returns the string value of this item if its type is _STRING_, or throws a runtime exception.
+_Map<String, Item>_ | _getMap()_ | Returns the map value of this item if its type is _MAP_, or throws a runtime exception.
+_List<Item>_ | _getList()_ | Returns the list value of this item if its type is _LIST_, or throws a runtime exception.
 
 
 ### Enum _fly.dream.cfg.ItemType_

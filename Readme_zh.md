@@ -85,12 +85,16 @@ listList1
 
 #### Constructor
 
-* _Loader(Path path)_ - 构造一个指定了文件路径的加载器。
+构造函数 | 描述
+-------- | ----
+_Loader(Path path)_ | 构造一个指定了文件路径的加载器。
 
 
 #### Method
 
-* _Config load()_ - 返回由指定文件解析出来的 _fly.dream.cfg.Config_ 对象。
+类型 | 方法 | 描述
+---- | ---- | ----
+_Config_ | _load()_ | 返回由指定文件解析出来的 _fly.dream.cfg.Config_ 对象。
 
 
 ### Class _fly.dream.cfg.Config_
@@ -100,20 +104,21 @@ listList1
 
 #### Methods
 
-* _boolean contains(String key)_ - 如果含有指定 key 对应的条目，则返回 _true_。
-* _Item get(String key)_ - 如果含有指定 key 对应的 _fly.dream.cfg.Item_ 对象，则将该对象返回，否则返回 _null_。
+类型 | 方法 | 描述
+---- | ---- | ----
+_boolean_ | _contains(String key)_ | 如果含有指定 key 对应的条目，则返回 _true_。
+_Item_ | _get(String key)_ | 如果含有指定 key 对应的 _fly.dream.cfg.Item_ 对象，则将该对象返回，否则返回 _null_。
 
 ### Interface _fly.dream.cfg.Item_
 
-提供以下方法：
-
-
 #### Methods
 
-* _ItemType getType()_ - 返回该实例的类型。
-* _String getString()_ - 如果该实例的类型为 STRING，则返回字符串值，否则抛出运行时异常。
-* _Map<String, Item> getMap()_ - 如果该实例的类型为 MAP，则返回映射图，否则抛出运行时异常。
-* _List<Item> getList()_ - 如果该实例的类型为 LIST，则返回列表，否则抛出运行时异常。
+类型 | 方法 | 描述
+---- | ---- | ----
+_ItemType_ | _getType()_ | 返回该实例的类型。
+_String_ | _getString()_ | 如果该实例的类型为 STRING，则返回字符串值，否则抛出运行时异常。
+_Map<String, Item>_ | _getMap()_ | 如果该实例的类型为 MAP，则返回映射图，否则抛出运行时异常。
+_List<Item>_ | _getList()_ | 如果该实例的类型为 LIST，则返回列表，否则抛出运行时异常。
 
 ### Enum _fly.dream.cfg.ItemType_
 
